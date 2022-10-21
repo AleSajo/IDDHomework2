@@ -73,13 +73,13 @@ public class Indexer {
                 .addTokenFilter(WordDelimiterGraphFilterFactory.class)
                 .build();
 
-        Map<String, Analyzer> perFieldAnalyzer = new HashMap<>();
+        Map<String, Analyzer> perFieldAnalyzers = new HashMap<>();
         CharArraySet stopWords = new CharArraySet(Arrays.asList("in", "dei", "di", "il", "lo", "la", "i", "o", "e"), true);
 
-        perFieldAnalyzer.put("title", titleAnalyzer);
-        perFieldAnalyzer.put("content", new StandardAnalyzer(stopWords));
+        perFieldAnalyzers.put("title", titleAnalyzer);
+        perFieldAnalyzers.put("content", new StandardAnalyzer(stopWords));
 
-        Analyzer analyzer = new PerFieldAnalyzerWrapper(new ItalianAnalyzer(), perFieldAnalyzer);
+        Analyzer analyzer = new PerFieldAnalyzerWrapper(new ItalianAnalyzer(), perFieldAnalyzers);
 
         //Index writer
         IndexWriterConfig config = new IndexWriterConfig(analyzer);
